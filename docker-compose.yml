@@ -1,0 +1,76 @@
+services:
+    php:
+        container_name: turk-ai-php
+        hostname: turk-ai-php
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        volumes:
+            - ./turk-ai-backend:/var/www/html
+            - ./docker/supervisor/log:/var/log/supervisor
+        networks:
+            - turk-ai-network
+
+    vue:
+        container_name: turk-ai-vue
+        hostname: turk-ai-vue
+        ports:
+            - "5173:5173"
+        build:
+            context: .
+            dockerfile: docker/node/Dockerfile
+        command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+        volumes:
+            - ./turk-ai-frontend:/var/app
+        networks:
+            - turk-ai-network
+
+    nginx:
+        container_name: turk-ai-nginx
+        hostname: turk-ai-nginx
+        image: nginx:latest
+        ports:
+            - "8000:80"
+        volumes:
+            - ./turk-ai-backend:/var/www/html
+            - ./docker/nginx:/etc/nginx/conf.d
+        depends_on:
+            - php
+            - vue
+        networks:
+            - turk-ai-network
+
+    postgres:
+        container_name: turk-ai-database
+        hostname: turk-ai-database
+        image: postgres:17
+        environment:
+            POSTGRES_USER: dbuser
+            POSTGRES_PASSWORD: dbpass
+            POSTGRES_DB: school_db
+        volumes:
+            - postgres:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        networks:
+            - turk-ai-network
+
+    redis:
+        container_name: turk-ai-redis
+        hostname: turk-ai-redis
+        image: redis:latest
+        command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+        volumes:
+            - redis_data:/data
+            - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
+        networks:
+            - turk-ai-network
+
+networks:
+    turk-ai-network:
+        name: turk-ai-network
+        driver: bridge
+
+volumes:
+    postgres:
+    redis_data:

@@ -1,0 +1,23 @@
+<?php
+return [
+    'user_already_exists' => 'Girmiş olduğunuz mail adresi sistemde kayıtlıdır',
+    'student_not_found' => 'Girmiş olduğunuz koda ait öğrenci bulunamadı. Lütfen kontrol ediniz.',
+    'student_already_has_parent' => 'Öğrenci velisine ait bir hesap bulunmaktadır lütfen giriş yapınız',
+    'register_success' => 'Kayıt başarı ile tamamlandı',
+    'login_success' => 'Giriş başarı ile tamamlandı',
+    'update_success' => 'Bilgileriniz başarı ile güncellendi',
+    'code_assigned' => 'Öğrenci kayıt kodu başarı ile oluşturuldu',
+    'invalid_credentials' => 'Mail adresi veya şifre hatalı',
+    'unauthenticated' => 'Oturum açmanız gerekmektedir',
+    'forbidden' => 'Bu işlem için yetkiniz bulunmamaktadır',
+    'server_error' => 'Sunucu hatası',
+    'not_found' => 'Aradığınız kayıt bulunamadı.',
+    'mail_welcome_subject' => 'Veli Kaydınız Oluşturuldu',
+    'mail_welcome_greeting' => 'Merhaba :name',
+    'mail_welcome_body' => 'Veli kaydınız başarı ile oluşturuldu kayıt bilgileriniz aşağıda yer almaktadır',
+    'mail_student_name' => 'Öğrenci',
+    'mail_student_number' => 'Okul Numarası',
+    'mail_student_grade' => 'Sınıf',
+    'mail_welcome_footer' => 'İyi günler dileriz.',
+    'register_error' => 'Kayıt olma sırasında bir hata meydana geldi.',
+];
