@@ -8,6 +8,10 @@
 docker compose up -d --build
 ```
 
+```bash
+docker exec -it turk-ai-php composer install
+```
+
 | | Adres |
 |---|---|
 | Frontend | http://localhost:5173 |
